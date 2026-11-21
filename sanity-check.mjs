@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const root = new URL('../', import.meta.url);
+const read = (path) => fs.readFileSync(new URL(path, root), 'utf8');
+const main = read('src/main.js');
+const server = read('server/index.js');
+const pkg = JSON.parse(read('package.json'));
+for (const file of ['index.html','src/main.js','src/style.css','server/index.js','scripts/sanity-check.mjs']) assert.ok(fs.existsSync(new URL(file, root)), `${file} missing`);
+for (const feature of ['THREE.WebGLRenderer','function attack()','function power(type)','function makeEnemy','function remoteActionVisual','STORY DIRECTIVES','minimap','mobile-jump','hero-action','story1Complete','story3Complete','nullTitan']) assert.ok(main.includes(feature), `client feature check failed: ${feature}`);
+for (const route of ['/api/register','/api/login','/api/me','/api/save','/api/health','auth-world','player-move','hero-action','chat']) assert.ok(server.includes(route), `server route/event check failed: ${route}`);
+for (const dep of ['three','socket.io','socket.io-client','express','bcryptjs','vite','concurrently']) assert.ok(pkg.dependencies?.[dep] || pkg.devDependencies?.[dep], `dependency missing: ${dep}`);
+console.log('Astra City static sanity checks passed.');

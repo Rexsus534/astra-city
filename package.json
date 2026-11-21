@@ -1,0 +1,25 @@
+{
+  "name": "astra-city-superhero",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k \"npm:server\" \"npm:client\"",
+    "server": "node server/index.js",
+    "client": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "test:sanity": "node scripts/sanity-check.mjs"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "three": "^0.171.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "vite": "^6.0.7"
+  }
+}
