@@ -250,3 +250,133 @@ button{touch-action:manipulation}
  .boss-hud{top:45px;width:45vw}.crosshair{display:none}.bottom-left{display:none}
  .modal-backdrop{z-index:50}.modal{width:80vw;max-height:84dvh;overflow-y:auto}
 }
+/* ASTRA CITY - readability, overhead labels and full mobile layout */
+:root{color:#f4fbff;--glass:rgba(12,30,47,.88)}
+body{background:#9fc9e2;touch-action:none;-webkit-user-select:none;user-select:none}
+#overlay{overflow:hidden}
+.player-tag{position:absolute;z-index:12;transform:translate(-50%,-100%);pointer-events:none;display:none;text-align:center;white-space:nowrap;padding:5px 9px;border-radius:8px;background:rgba(5,18,31,.88);border:1px solid rgba(115,220,255,.72);box-shadow:0 2px 12px #001b35aa;color:#fff;font-size:12px;text-shadow:0 1px 3px #000}
+.player-tag b{display:block;font-weight:800}.player-tag small{display:block;color:#8ee7ff;font-size:9px;margin-top:2px}
+.overhead-chat{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);max-width:min(240px,70vw);white-space:normal;overflow-wrap:anywhere;background:#f4fbff;color:#10283a;text-shadow:none;border-radius:12px;padding:8px 11px;font-size:12px;font-weight:700;box-shadow:0 4px 18px #00182d88}
+.overhead-chat:after{content:"";position:absolute;top:100%;left:50%;border:7px solid transparent;border-top-color:#f4fbff}
+.overhead-chat.visible{display:block;animation:chat-pop .16s ease-out}
+@keyframes chat-pop{from{opacity:0;transform:translate(-50%,5px) scale(.94)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+.mission-card,.bars,.player-badge,.stats,.menu,.chat,.bottom-left{background:rgba(7,23,38,.9);box-shadow:0 5px 22px #00182d44}
+.mission-card p,.mission-progress,.bar-label,.player-badge,.stats{color:#e0f2ff}
+.mobile-look{display:none;position:absolute;right:0;top:16%;width:48vw;height:48vh;z-index:3;pointer-events:auto;touch-action:none;background:transparent}
+button{touch-action:manipulation}
+@media(max-width:750px){
+ .topbar{top:max(7px,env(safe-area-inset-top));left:8px;right:8px;gap:5px;align-items:flex-start}
+ .brand-small{font-size:12px}.topbar .subtitle{font-size:8px;letter-spacing:1px;margin:3px 0}
+ .player-badge{font-size:9px;padding:7px 8px}.stats{gap:6px;padding:7px;font-size:8px}
+ .left-panel{left:8px;top:82px;width:min(185px,47vw)}.mission-card{padding:9px}.mission-card h3{font-size:11px;margin:5px 0}.mission-card p{font-size:9px}.mission-progress{font-size:8px}.bars{padding:8px;margin-top:7px}.bar-label{font-size:8px}
+ .map{width:88px;height:88px;right:7px;bottom:7px}.map-label{font-size:6px}.map canvas{width:100%;height:100%}
+ .abilitybar{bottom:calc(10px + env(safe-area-inset-bottom));left:50%;max-width:58vw;overflow-x:auto;justify-content:flex-start;transform:translateX(-50%);z-index:4}.ability{min-width:43px;padding:6px 3px}.ability strong{font-size:8px}
+ .mobile-controls{display:block;left:10px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:6}.mobile-controls .stick{width:112px;height:112px}.mobile-controls .knob{left:33px;top:33px;width:44px;height:44px}
+ .mobile-buttons{display:flex;right:8px;bottom:calc(12px + env(safe-area-inset-bottom));width:42vw;max-width:190px;gap:5px;z-index:7;justify-content:flex-end;align-items:flex-end}
+ .mobile-buttons button{width:clamp(43px,12vw,54px);height:clamp(43px,12vw,54px);font-size:7px;padding:2px;border:1px solid #9deaffaa;box-shadow:0 2px 10px #00182d88}
+ .mobile-look{display:block;top:18%;height:42vh;width:48vw}
+ .menu{right:8px;top:82px;width:min(210px,65vw);max-height:70vh;overflow:auto;z-index:10}
+ .chat{right:8px;bottom:150px;width:min(250px,75vw);z-index:10}.chat-log{height:90px}
+ .toast{top:70px;max-width:85vw;text-align:center;font-size:9px;z-index:15}
+ .boss-hud{top:65px}.modal{max-height:78dvh;width:94vw;padding:14px}.modal-backdrop{z-index:20}
+ .auth-card{padding:24px 20px}.logo{font-size:26px}
+}
+@media(max-width:390px){.left-panel{width:160px}.stats span:nth-child(1){display:none}.mobile-controls .stick{width:96px;height:96px}.mobile-controls .knob{left:26px;top:26px}.mobile-buttons{width:45vw}.abilitybar{max-width:54vw}}
+
+
+/* ASTRA CITY MOBILE FIX v2: keep the hero visible and controls separated */
+.menu-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px}
+.menu-head h3{margin:4px 4px 8px}
+.menu-close{display:none;flex:0 0 auto;width:36px;height:34px;padding:0;border-radius:8px;font-size:18px;line-height:1}
+.mobile-top-actions{display:none}
+#game{position:fixed;inset:0;z-index:0}
+#game canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+#overlay{z-index:1}
+@media(max-width:750px){
+  html,body,#app,#game{width:100%;height:100%;height:100dvh;min-height:100%;overflow:hidden}
+  #overlay{height:100dvh;min-height:100%;overflow:hidden}
+  .topbar{right:8px;left:8px;top:max(6px,env(safe-area-inset-top));display:flex;flex-wrap:wrap;align-items:center;gap:5px}
+  .topbar>div:first-child{display:none}
+  .player-badge{margin-right:auto;max-width:48vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .stats{margin-left:auto}
+  .left-panel{top:54px;left:7px;width:min(148px,39vw);z-index:2}
+  .mission-card{padding:7px}.mission-title{font-size:8px}.mission-card h3{font-size:10px}.mission-card p{font-size:8px;line-height:1.25}.mission-progress{font-size:7px}
+  .bars{padding:7px;margin-top:5px}.bar-label{font-size:7px;margin:3px 0}.bar{height:5px}
+  .map{width:68px;height:68px;right:7px;bottom:calc(9px + env(safe-area-inset-bottom));z-index:2;opacity:.85}.map-label{display:none}
+  .abilitybar{left:50%;bottom:calc(9px + env(safe-area-inset-bottom));max-width:40vw;gap:3px;z-index:4;overflow-x:auto;justify-content:flex-start}
+  .ability{min-width:36px;padding:5px 2px;font-size:6px}.ability strong{font-size:7px;margin-bottom:2px}
+  .mobile-controls{display:block;position:absolute;left:10px;bottom:calc(18px + env(safe-area-inset-bottom));width:116px;height:116px;z-index:8;pointer-events:auto}
+  .mobile-controls .stick{width:116px;height:116px;position:relative;border-radius:50%;background:rgba(16,55,82,.42);border:2px solid rgba(126,220,255,.72);box-shadow:0 3px 18px #00182d88;touch-action:none}
+  .mobile-controls .knob{width:48px;height:48px;left:32px;top:32px;border:2px solid #c6f4ff;background:rgba(55,184,235,.75)}
+  .mobile-buttons{display:grid;position:absolute;right:9px;bottom:calc(14px + env(safe-area-inset-bottom));width:min(43vw,178px);grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;z-index:9;pointer-events:auto;justify-items:stretch;align-items:stretch}
+  .mobile-buttons button{width:100%;height:clamp(42px,11vw,50px);min-width:0;padding:2px;font-size:7px;line-height:1.05;border-radius:12px;white-space:normal;touch-action:manipulation;box-shadow:0 3px 12px #00182d99}
+  #mobile-tele{font-size:6px}
+  .mobile-top-actions{display:flex;position:absolute;right:8px;top:calc(56px + env(safe-area-inset-top));gap:6px;z-index:14;pointer-events:auto}
+  .mobile-top-actions button{min-width:62px;height:34px;padding:0 9px;font-size:9px;border:1px solid #a8edff;box-shadow:0 3px 12px #00182d99}
+  .mobile-look{display:block;position:absolute;right:0;top:20%;width:52vw;height:43vh;z-index:3;pointer-events:auto;touch-action:none;background:transparent}
+  .menu{position:absolute;right:8px;top:calc(96px + env(safe-area-inset-top));width:min(270px,82vw);max-height:calc(100dvh - 120px);overflow-y:auto;z-index:30;padding:12px;background:rgba(4,17,30,.97);border:1px solid #69dfff;box-shadow:0 10px 35px #00101fcc}
+  .menu.open{display:block}
+  .menu-close{display:block}
+  .menu button:not(.menu-close){font-size:10px;padding:10px}
+  .chat{right:8px;top:calc(96px + env(safe-area-inset-top));bottom:auto;width:min(270px,82vw);z-index:31;background:rgba(4,17,30,.97)}
+  .chat-log{height:100px}
+  .toast{top:calc(94px + env(safe-area-inset-top));z-index:35;max-width:80vw}
+  .boss-hud{top:calc(94px + env(safe-area-inset-top));width:70vw;z-index:4}
+  .crosshair{display:none}
+  .bottom-left{display:none}
+  .modal-backdrop{z-index:50}
+  .modal{width:94vw;max-height:82dvh;overflow-y:auto}
+}
+@media(max-width:390px){
+  .mobile-controls{width:98px;height:98px;left:7px;bottom:calc(15px + env(safe-area-inset-bottom))}
+  .mobile-controls .stick{width:98px;height:98px}
+  .mobile-controls .knob{left:25px;top:25px;width:44px;height:44px}
+  .mobile-buttons{width:44vw;right:6px;gap:4px}
+  .mobile-buttons button{height:41px;font-size:6px}
+  .abilitybar{display:none}
+  .left-panel{width:132px}
+}
+
+
+/* ASTRA CITY LANDSCAPE MODE: require horizontal play on phones */
+#rotate-notice{display:none}
+#rotate-notice.show{display:flex;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;padding:24px;background:radial-gradient(circle at 50% 35%,#17466a,#061321 72%);color:#f4fbff;text-align:center}
+.rotate-card{width:min(420px,90vw);padding:28px 24px;border:1px solid #62dfff;border-radius:20px;background:rgba(5,22,39,.94);box-shadow:0 12px 50px #0009}
+.rotate-icon{font-size:64px;line-height:1.2;color:#8beaff;transform:rotate(90deg)}
+.rotate-card h2{margin:12px 0 8px;letter-spacing:4px}.rotate-card p{font-size:16px;line-height:1.5}.rotate-card small{color:#9bc5dc}
+/* Landscape phones are detected by their short viewport height, even when width exceeds 750px. */
+@media (pointer:coarse) and (orientation:landscape) and (max-height:600px){
+ html,body,#app,#game{width:100%;height:100%;height:100dvh;min-height:100%;overflow:hidden}
+ #overlay{height:100dvh;overflow:hidden}
+ .topbar{left:9px;right:9px;top:max(5px,env(safe-area-inset-top));display:flex;gap:6px;align-items:center}
+ .topbar>div:first-child{display:none}
+ .player-badge{font-size:9px;padding:6px 8px;max-width:40vw}
+ .stats{font-size:8px;padding:6px;gap:7px;margin-left:auto}
+ .left-panel{left:8px;top:48px;width:150px;z-index:2}
+ .mission-card{padding:7px}.mission-title{font-size:8px}.mission-card h3{font-size:10px;margin:4px 0}.mission-card p{font-size:8px;line-height:1.2}.mission-progress{font-size:7px}
+ .bars{padding:6px;margin-top:4px}.bar-label{font-size:7px;margin:2px 0}.bar{height:5px}
+ .map{width:65px;height:65px;right:7px;bottom:5px;z-index:2}.map-label{display:none}
+ .abilitybar{display:flex;left:50%;bottom:5px;max-width:35vw;gap:3px;z-index:4;overflow-x:auto;transform:translateX(-50%)}
+ .ability{min-width:34px;padding:4px 2px;font-size:6px}.ability strong{font-size:7px}
+ .mobile-controls{display:block;position:absolute;left:10px;bottom:8px;width:92px;height:92px;z-index:8}
+ .mobile-controls .stick{width:92px;height:92px}.mobile-controls .knob{width:40px;height:40px;left:24px;top:24px}
+ .mobile-buttons{display:grid;position:absolute;right:8px;bottom:7px;width:min(31vw,190px);grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;z-index:9}
+ .mobile-buttons button{width:100%;height:36px;min-width:0;padding:2px;font-size:7px;line-height:1}
+ .mobile-look{display:block;position:absolute;right:0;top:14%;width:48vw;height:60vh;z-index:3;touch-action:none}
+ .mobile-top-actions{display:flex;position:absolute;right:8px;top:calc(42px + env(safe-area-inset-top));gap:5px;z-index:14}
+ .mobile-top-actions button{min-width:58px;height:29px;padding:0 7px;font-size:8px}
+ .menu{position:absolute;right:8px;top:calc(76px + env(safe-area-inset-top));width:min(250px,45vw);max-height:calc(100dvh - 84px);overflow-y:auto;z-index:30;padding:10px;background:rgba(4,17,30,.97)}
+ .menu.open{display:block}.menu-close{display:block}.menu button:not(.menu-close){font-size:9px;padding:7px}
+ .chat{right:8px;top:calc(76px + env(safe-area-inset-top));bottom:auto;width:min(250px,45vw);z-index:31}.chat-log{height:70px}
+ .toast{top:calc(76px + env(safe-area-inset-top));max-width:70vw;font-size:9px;z-index:35}
+ .boss-hud{top:45px;width:45vw}.crosshair{display:none}.bottom-left{display:none}
+ .modal-backdrop{z-index:50}.modal{width:80vw;max-height:84dvh;overflow-y:auto}
+}
+
+/* ASTRA CITY LANDSCAPE BUTTON INPUT FIX */
+.mobile-top-actions{position:fixed!important;z-index:99999!important;pointer-events:auto!important;isolation:isolate}
+.mobile-top-actions button{position:relative!important;z-index:100000!important;pointer-events:auto!important;touch-action:manipulation!important;-webkit-tap-highlight-color:transparent;user-select:none}
+#menu,#chat{z-index:99998!important;pointer-events:auto!important}
+#menu.open{display:block!important;visibility:visible!important;opacity:1!important}
+#chat.open{display:block!important;visibility:visible!important;opacity:1!important}
+#mobile-menu-close{pointer-events:auto!important;touch-action:manipulation!important}
