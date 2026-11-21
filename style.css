@@ -10,3 +10,35 @@
 button:disabled{opacity:.45;cursor:not-allowed;transform:none!important;filter:none!important}
 .mobile-buttons button:active{transform:scale(.94)}
 @media(max-width:750px){.boss-hud{top:75px;width:72vw}.left-panel{top:125px}.map{opacity:.8}.abilitybar{max-width:95vw;overflow:auto}.ability{flex:0 0 auto}}
+/* ASTRA CITY - readability, overhead labels and full mobile layout */
+:root{color:#f4fbff;--glass:rgba(12,30,47,.88)}
+body{background:#9fc9e2;touch-action:none;-webkit-user-select:none;user-select:none}
+#overlay{overflow:hidden}
+.player-tag{position:absolute;z-index:12;transform:translate(-50%,-100%);pointer-events:none;display:none;text-align:center;white-space:nowrap;padding:5px 9px;border-radius:8px;background:rgba(5,18,31,.88);border:1px solid rgba(115,220,255,.72);box-shadow:0 2px 12px #001b35aa;color:#fff;font-size:12px;text-shadow:0 1px 3px #000}
+.player-tag b{display:block;font-weight:800}.player-tag small{display:block;color:#8ee7ff;font-size:9px;margin-top:2px}
+.overhead-chat{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);max-width:min(240px,70vw);white-space:normal;overflow-wrap:anywhere;background:#f4fbff;color:#10283a;text-shadow:none;border-radius:12px;padding:8px 11px;font-size:12px;font-weight:700;box-shadow:0 4px 18px #00182d88}
+.overhead-chat:after{content:"";position:absolute;top:100%;left:50%;border:7px solid transparent;border-top-color:#f4fbff}
+.overhead-chat.visible{display:block;animation:chat-pop .16s ease-out}
+@keyframes chat-pop{from{opacity:0;transform:translate(-50%,5px) scale(.94)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+.mission-card,.bars,.player-badge,.stats,.menu,.chat,.bottom-left{background:rgba(7,23,38,.9);box-shadow:0 5px 22px #00182d44}
+.mission-card p,.mission-progress,.bar-label,.player-badge,.stats{color:#e0f2ff}
+.mobile-look{display:none;position:absolute;right:0;top:16%;width:48vw;height:48vh;z-index:3;pointer-events:auto;touch-action:none;background:transparent}
+button{touch-action:manipulation}
+@media(max-width:750px){
+ .topbar{top:max(7px,env(safe-area-inset-top));left:8px;right:8px;gap:5px;align-items:flex-start}
+ .brand-small{font-size:12px}.topbar .subtitle{font-size:8px;letter-spacing:1px;margin:3px 0}
+ .player-badge{font-size:9px;padding:7px 8px}.stats{gap:6px;padding:7px;font-size:8px}
+ .left-panel{left:8px;top:82px;width:min(185px,47vw)}.mission-card{padding:9px}.mission-card h3{font-size:11px;margin:5px 0}.mission-card p{font-size:9px}.mission-progress{font-size:8px}.bars{padding:8px;margin-top:7px}.bar-label{font-size:8px}
+ .map{width:88px;height:88px;right:7px;bottom:7px}.map-label{font-size:6px}.map canvas{width:100%;height:100%}
+ .abilitybar{bottom:calc(10px + env(safe-area-inset-bottom));left:50%;max-width:58vw;overflow-x:auto;justify-content:flex-start;transform:translateX(-50%);z-index:4}.ability{min-width:43px;padding:6px 3px}.ability strong{font-size:8px}
+ .mobile-controls{display:block;left:10px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:6}.mobile-controls .stick{width:112px;height:112px}.mobile-controls .knob{left:33px;top:33px;width:44px;height:44px}
+ .mobile-buttons{display:flex;right:8px;bottom:calc(12px + env(safe-area-inset-bottom));width:42vw;max-width:190px;gap:5px;z-index:7;justify-content:flex-end;align-items:flex-end}
+ .mobile-buttons button{width:clamp(43px,12vw,54px);height:clamp(43px,12vw,54px);font-size:7px;padding:2px;border:1px solid #9deaffaa;box-shadow:0 2px 10px #00182d88}
+ .mobile-look{display:block;top:18%;height:42vh;width:48vw}
+ .menu{right:8px;top:82px;width:min(210px,65vw);max-height:70vh;overflow:auto;z-index:10}
+ .chat{right:8px;bottom:150px;width:min(250px,75vw);z-index:10}.chat-log{height:90px}
+ .toast{top:70px;max-width:85vw;text-align:center;font-size:9px;z-index:15}
+ .boss-hud{top:65px}.modal{max-height:78dvh;width:94vw;padding:14px}.modal-backdrop{z-index:20}
+ .auth-card{padding:24px 20px}.logo{font-size:26px}
+}
+@media(max-width:390px){.left-panel{width:160px}.stats span:nth-child(1){display:none}.mobile-controls .stick{width:96px;height:96px}.mobile-controls .knob{left:26px;top:26px}.mobile-buttons{width:45vw}.abilitybar{max-width:54vw}}
